@@ -17,12 +17,14 @@ services:
       - ../uploads:/app/uploads
       - ../.moduleignore:/app/.moduleignore
     command: [ "sh", "-c", "sh /app/entrypoint.sh" ]
+    environment:
+      - FLASK_DEBUG = False
 
   db:
     container_name: mariadb_container
     env_file:
       - ../.env
-    image: mariadb:latest
+    image: mariadb:11.2
     command: --default-authentication-plugin=mysql_native_password
     restart: always
     ports:
